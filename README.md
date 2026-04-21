@@ -61,8 +61,9 @@ VITE_BACKEND_URL=http://localhost:8080
 
 ### 1. Clone the repository
 
-git clone https://github.com/your-username/mern-auth.git
-cd mern-auth
+git clone https://github.com/aditya-dev-404/authentication-system
+cd MernAuthentication
+
 2. Setup Backend
 cd server
 npm install
@@ -74,20 +75,22 @@ npm run dev
 
 ---
 
-🔐 Authentication Flow
-📝 Signup
+Authentication Flow
+
+-Signup
 User registers with email & password
 OTP is sent to email
 User verifies OTP
 Account gets activated
-🔓 Login
+-Login
 User logs in with credentials
 JWT token is stored in HTTP-only cookie
 User session is maintained securely
-🔁 Forgot Password
+-Forgot Password
 User enters email
 OTP is sent
 User verifies OTP
 User sets new password
+
 
 
