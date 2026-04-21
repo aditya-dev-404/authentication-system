@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken'
 import User from "../models/userModel.js";
 import { ENV } from "../config/env.js";
 import transporter from "../config/nodeMailer.js";
-
+import { EMAIL_VERIFY_TEMPLATE, PASSWORD_RESET_TEMPLATE } from "../config/emailTemplate.js";
 
 
 
@@ -111,7 +111,8 @@ export const sendVerifyOtp = asyncHandler(async (req, res) =>{
         from : ENV.SENDER_EMAIL,
         to : user.email,
         subject : "Verify your account",
-        text :  `Your verification OTP is ${otp}. It will expire in 10 minutes.`,
+
+        html : EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", otp).replace('{{email}}', user.email),
     }
     await transporter.sendMail(mailOptions);
     return res.status(200).json(new ApiResponse(200, {}, "Verification OTP Send to the email"))
@@ -165,7 +166,7 @@ export const sendPassResetOtp = asyncHandler(async (req, res) =>{
         from : ENV.SENDER_EMAIL,
         to : user.email,
         subject : "Password Reset OTP",
-        text :  `Your password reset OTP is ${otp}. It will expire in 10 minutes.`, 
+        html : PASSWORD_RESET_TEMPLATE.replace("{{otp}}", otp).replace('{{email}}', user.email),
     }
     await transporter.sendMail(mailOptions);
     return res.status(200).json(new ApiResponse(200, {}, "If this email exists, OTP has been sent"))
